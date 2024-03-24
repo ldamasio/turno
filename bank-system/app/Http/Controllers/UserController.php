@@ -7,8 +7,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
-    {
+    public function register(Request $request) {
         $validatedData = $request->validate([
             'username' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
