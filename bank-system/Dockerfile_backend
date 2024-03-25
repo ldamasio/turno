@@ -18,7 +18,7 @@ RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
 COPY . .
 RUN composer dump-autoload --optimize
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
-RUN chmod -R 775 /app/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /app/storage /app/bootstrap/cache
 EXPOSE 9000
 CMD ["php-fpm"]
 RUN npm install
