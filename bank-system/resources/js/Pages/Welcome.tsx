@@ -1,11 +1,28 @@
-import { Link, Head } from '@inertiajs/react';
-import { PageProps } from '@/types';
+import { useEffect, FormEventHandler } from 'react';
+import { Link, Head, useForm } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
+export default function Welcome() {
+
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+    });
+
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        data.password_confirmation = data.password;
+
+        post(route('register'));
+    };
+
     return (
         <>
-            <Head title="Welcome" />
-            <div class="flex min-h-full flex-col justify-center">
+            <Head title="Sign Up" />
+            <div className="flex min-h-full flex-col justify-center">
 
                 <div className="bg-bnb-blue text-white py-20 pb-5">
                     <div className="container mx-auto text-center">
@@ -14,111 +31,100 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                 </div>
 
 
-                <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
-                        <div>
-                            <div class="mt-2">
-                                <input
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    autoComplete="email"
-                                    required
-                                    placeholder="username"
-                                    className="
-                                        block 
-                                        w-full 
-                                        rounded-xl
-                                        border-2
-                                        border-bnb-light-blue
-                                        placeholder-text-bnb-light-blue
-                                        py-3
-                                        text-gray-900 
-                                        shadow-sm 
-                                        ring-1 
-                                        ring-inset 
-                                        ring-gray-300 
-                                        focus:ring-2 
-                                        focus:ring-inset 
-                                        focus:ring-indigo-600 
-                                        md:text-md 
-                                        sm:leading-6
-                                    "
-                                />
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm ml-5 mr-5">
+                    <form className="space-y-6" onSubmit={submit}>
+                        <div className="ml-3 mr-3">
+                            <div>
+                                <div className="mt-2">
+                                    <input
+                                        id="username"
+                                        name="username"
+                                        type="text"
+                                        autoComplete="email"
+                                        required
+                                        placeholder="username"
+                                        onChange={(e) => setData('name', e.target.value)}
+                                        className="
+                                            block 
+                                            w-full 
+                                            rounded-xl
+                                            border-2
+                                            border-bnb-light-blue
+                                            placeholder-text-bnb-light-blue
+                                            py-3
+                                            shadow-sm 
+                                            md:text-md 
+                                            sm:leading-6
+                                        "
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    placeholder="email"
-                                    className="
-                                        block 
-                                        w-full 
-                                        rounded-xl
-                                        border-2
-                                        border-bnb-light-blue
-                                        placeholder-text-bnb-light-blue
-                                        py-3
-                                        text-gray-900 
-                                        shadow-sm 
-                                        ring-1 
-                                        ring-inset 
-                                        ring-gray-300 
-                                        focus:ring-2 
-                                        focus:ring-inset 
-                                        focus:ring-indigo-600 
-                                        md:text-md 
-                                        sm:leading-6
-                                    "
-                                />
+                            <div>
+                                <div className="mt-6">
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        required
+                                        placeholder="email"
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        className="
+                                            block 
+                                            w-full 
+                                            rounded-xl
+                                            border-2
+                                            border-bnb-light-blue
+                                            placeholder-text-bnb-light-blue
+                                            py-3
+                                            shadow-sm
+                                            md:text-md 
+                                            sm:leading-6
+                                        "
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="mt-6">
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        placeholder="password"
+                                        onChange={(e) => setData('password', e.target.value)}
+                                        required
+                                        className="
+                                            block 
+                                            w-full 
+                                            rounded-xl
+                                            border-2
+                                            border-bnb-light-blue
+                                            placeholder-text-bnb-light-blue
+                                            py-3
+                                            shadow-sm
+                                            md:text-md 
+                                            sm:leading-6
+                                        "
+                                    />
+                                </div>
                             </div>
                         </div>
 
                         <div>
-                            <div class="mt-2">
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    placeholder="password"
-                                    autocomplete="current-password"
-                                    required
-                                    className="
-                                        block 
-                                        w-full 
-                                        rounded-xl
-                                        border-2
-                                        border-bnb-light-blue
-                                        placeholder-text-bnb-light-blue
-                                        py-3
-                                        text-gray-900 
-                                        shadow-sm 
-                                        ring-1 
-                                        ring-inset 
-                                        ring-gray-300 
-                                        focus:ring-2 
-                                        focus:ring-inset 
-                                        focus:ring-indigo-600 
-                                        md:text-md 
-                                        sm:leading-6
-                                    "
-                                />
-                            </div>
-                        </div>
 
-                        <div>
-                            <button
+                            <PrimaryButton className="ms-4" disabled={processing}>
+                                Register
+                            </PrimaryButton>
+
+                            {/* <button
                                 type="submit"
-                                class="
+                                className="
                                     bg-bnb-blue
                                     flex w-full 
                                     justify-center 
-                                    rounded-sm  
+                                    rounded-sm
+                                    mt-10
                                     px-3 
                                     py-3
                                     text-sm 
@@ -126,21 +132,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                     leading-6 
                                     text-white 
                                     shadow-sm 
-                                    focus-visible:outline 
-                                    focus-visible:outline-2 
-                                    focus-visible:outline-offset-2 
-                                    focus-visible:outline-indigo-600
                                 "
                             >
                                 SIGN UP
-                            </button>
+                            </button> */}
                         </div>
                     </form>
 
-                    <div className="border-t-4 border-bnb-light-blue w-5 mx-auto my-10"></div>
+                    <div className="border-t-4 border-bnb-light-blue w-5 mx-auto my-8"></div>
 
-                    <p class="mt-10 text-center text-sm text-gray-500">
-                        <a href="#" class="text-bnb-blue font-semibold leading-6">
+                    <p className="mt-8 mb-20 text-center text-sm">
+                        <a href="#" className="text-bnb-blue font-semibold leading-6">
                             Already have a account?
                         </a>
                     </p>
