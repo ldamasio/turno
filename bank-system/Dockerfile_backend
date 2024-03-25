@@ -13,7 +13,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-COPY ./bank-system/composer.json ./
+COPY ./composer.json ./
 RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
 COPY . .
 RUN composer dump-autoload --optimize
