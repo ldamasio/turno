@@ -11,12 +11,12 @@ export default function Home({ user, header, children }: PropsWithChildren<{ use
 
     return (
         <div className="min-h-screen">
-            <nav className="bg-bnb-light-blue">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="bg-bnb-mat-blue">
+                <div>
 
-                    <div className="flex items-center justify-between h-16 w-full px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16 w-full">
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        <div className="hidden sm:flex sm:items-center ">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -41,7 +41,7 @@ export default function Home({ user, header, children }: PropsWithChildren<{ use
                         </div>
 
                         <div className="flex items-center justify-center flex-1">
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div className="hidden sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     BNB Bank
                                 </NavLink>
@@ -49,35 +49,36 @@ export default function Home({ user, header, children }: PropsWithChildren<{ use
                         </div>
                     </div>
                 </div>
-
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
             </nav>
 
             {header && (
-                <header className="bg-white dark:bg-gray-800 shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+                <header className="bg-bnb-mat-blue text-white">
+                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-2">
+                            <div>
+                                <div className="text-xs">
+                                    Current balance
+                                </div>
+                                <div className="text-xl">
+                                    $ 500.00
+                                </div>
+                            </div>
+                            <div>
+
+                                <div className="relative">
+                                    <select
+                                        className="block appearance-none w-full bg-transparent border border-transparent px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                    >
+                                        <option>March 2021</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </header>
             )}
 

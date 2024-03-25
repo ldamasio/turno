@@ -38,7 +38,7 @@ const Trigger = ({ children }: PropsWithChildren) => {
     );
 };
 
-const Content = ({ align = 'left', width = '48', contentClasses = 'py-1 bg-bnb-light-blue text-white', children }: PropsWithChildren<{ align?: 'left'|'right', width?: '48', contentClasses?: string }>) => {
+const Content = ({ align = 'left', width = '48', contentClasses = 'py-1 bg-bnb-blue text-white', children }: PropsWithChildren<{ align?: 'left'|'right', width?: '48', contentClasses?: string }>) => {
     const { open, setOpen } = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';

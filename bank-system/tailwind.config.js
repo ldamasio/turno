@@ -14,7 +14,8 @@ export default {
         extend: {
             colors: {
                 'bnb-blue': '#2799fb',
-                'bnb-light-blue': '#bde0fe',
+                'bnb-mat-blue': '#bde0fe',
+                'bnb-light-blue': '#daefff',
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
