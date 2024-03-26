@@ -13,7 +13,7 @@ jobs:
 
       - name: Set up environment
         run: |
-          mv .env.example .env
+          mv bank-system/.env.example bank-system/.env
           echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
