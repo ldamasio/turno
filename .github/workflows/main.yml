@@ -1,24 +1,28 @@
-name: Build and Push Docker Images
+name: BNB Bank Production CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.1
 
-      - name: Build and Push Backend Docker Image
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PWD }}
-        run: |
-          cd bank-system
-          docker build -t ldamasio/backend:latest -f Dockerfile .
-          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          docker push ldamasio/turno-backend:latest
+      - name: Docker Login
+        uses: docker/login-action@v3.0.0
+        with:
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKERHUB_PWD}}
+
+      - name: Build and push Docker frontend image
+        uses: docker/build-push-action@v5.0.0
+        with: 
+          context: ./bank-system
+          file: ./bank-system/Dockerfile
+          push: true
+          tags: | 
+            ldamasio/turno:0.0.${{github.run_number}}
+            ldamasio/turno:latest
