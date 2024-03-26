@@ -1,31 +1,42 @@
 FROM php:8.2-fpm
-WORKDIR /app
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
+
+WORKDIR /var/www/html
+
+RUN apt-get update && \
+    apt-get install -y \
+    libpq-dev \
     libxml2-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libzip-dev \
     zip \
-    unzip
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    unzip \
+    curl \
+    nodejs \
+    npm
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql pgsql mysqli gd exif pcntl bcmath opcache zip
+
+COPY . .
+
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
+RUN composer dump-autoload --optimize
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 9000
+EXPOSE 8000
+
+CMD ["php-fpm", "-F"]
+
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-COPY ./composer.json ./
-RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
-COPY . .
-RUN composer dump-autoload --optimize
-RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
-RUN chmod -R 775 /app/storage /app/bootstrap/cache
-EXPOSE 9000
-CMD ["php-fpm"]
+RUN npm install -g npm@latest
+RUN npm install -g create-vite
 RUN npm install
 RUN npm run build
-
-FROM nginx:stable-alpine as prod
-COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
