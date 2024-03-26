@@ -14,8 +14,8 @@ jobs:
       - name: Set up environment
         run: |
           mv bank-system/.env.example bank-system/.env
-          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> bank-system/.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> bank-system/.env
 
       - name: Docker Login
         uses: docker/login-action@v3.0.0
