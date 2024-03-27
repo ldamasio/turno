@@ -14,7 +14,8 @@ RUN apt-get update && \
     unzip \
     curl \
     nodejs \
-    npm
+    npm \
+    nginx
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql pgsql mysqli gd exif pcntl bcmath opcache zip
@@ -23,14 +24,14 @@ COPY . .
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
-RUN composer dump-autoload --optimize
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.1.9
+RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader --no-interaction
 
-RUN chmod +x setup.sh
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod +x setup.sh
 
 EXPOSE 8080
 
-CMD ["/bin/bash", "./setup.sh"]
+CMD ["./setup.sh"]
+
