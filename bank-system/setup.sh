@@ -9,4 +9,4 @@ npm install
 npm run build
 
 # Start the PHP-FPM server
-php-fpm -F
+php artisan serve --host=0.0.0.0 --port=8080
