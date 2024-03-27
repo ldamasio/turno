@@ -113,25 +113,27 @@ export default function Welcome() {
 
                         <div>
 
-                            <PrimaryButton className="ms-4" disabled={processing}>
-                                Register
+                            <PrimaryButton className="
+                            bg-bnb-blue
+                            flex w-full 
+                            justify-center 
+                            rounded-sm
+                            mt-10
+                            px-3 
+                            py-3
+                            text-sm 
+                            font-semibold 
+                            leading-6 
+                            text-white 
+                            shadow-sm 
+                            " disabled={processing}>
+                                SIGN UP
                             </PrimaryButton>
 
                             {/* <button
                                 type="submit"
                                 className="
-                                    bg-bnb-blue
-                                    flex w-full 
-                                    justify-center 
-                                    rounded-sm
-                                    mt-10
-                                    px-3 
-                                    py-3
-                                    text-sm 
-                                    font-semibold 
-                                    leading-6 
-                                    text-white 
-                                    shadow-sm 
+   
                                 "
                             >
                                 SIGN UP

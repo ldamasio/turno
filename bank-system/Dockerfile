@@ -29,14 +29,8 @@ RUN composer dump-autoload --optimize
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 9000
+RUN chmod +x setup.sh
+
 EXPOSE 8000
 
-CMD ["php-fpm", "-F"]
-
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
-RUN npm install -g npm@latest
-RUN npm install -g create-vite
-RUN npm install
-RUN npm run build
+CMD ["/bin/bash", "./setup.sh"]
