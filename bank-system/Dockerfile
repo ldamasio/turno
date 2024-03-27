@@ -31,6 +31,6 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN chmod +x setup.sh
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["/bin/bash", "./setup.sh"]
