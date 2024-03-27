@@ -8,3 +8,5 @@ npm install -g create-vite
 npm install
 npm run build
 
+# Start the PHP-FPM server
+php artisan serve --host=0.0.0.0 --port=8080
