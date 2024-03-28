@@ -33,26 +33,25 @@ const Trigger = ({ children }: PropsWithChildren) => {
         <>
             <div onClick={toggleOpen}>{children}</div>
 
-            {open && <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>}
+            {open && (
+                <div
+                    className="fixed inset-0 z-40 bg-black opacity-50"
+                    onClick={() => setOpen(false)}
+                ></div>
+            )}
         </>
     );
 };
 
-const Content = ({ align = 'left', width = '48', contentClasses = 'py-1 bg-bnb-blue text-white', children }: PropsWithChildren<{ align?: 'left'|'right', width?: '48', contentClasses?: string }>) => {
+const Content = ({ align = 'left', contentClasses = 'py-1 bg-bnb-blue text-white', header, items }: PropsWithChildren<{ align?: 'left'|'right', contentClasses?: string, header: string, items: { text: string, href: string, icon: JSX.Element }[] }>) => {
     const { open, setOpen } = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';
 
     if (align === 'left') {
-        alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
+        alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right left-0';
     } else if (align === 'right') {
-        alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-    }
-
-    let widthClasses = '';
-
-    if (width === '48') {
-        widthClasses = 'w-48';
+        alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left right-0';
     }
 
     return (
@@ -68,10 +67,23 @@ const Content = ({ align = 'left', width = '48', contentClasses = 'py-1 bg-bnb-b
                 leaveTo="opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`fixed inset-y-0 w-1/2 ${alignmentClasses} z-50 bg-white ${contentClasses}`}
                     onClick={() => setOpen(false)}
                 >
-                    <div className={`rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses}>{children}</div>
+                    <div className="h-full flex flex-col">
+                        <div className="-mt-1 py-4 px-6 bg-bnb-mat-blue text-white flex items-center justify-center h-28 text-xl font-bold">
+                            <strong>{header}</strong>
+                        </div>
+
+                        <div className="-mb-1 flex-grow bg-bnb-blue p-4">
+                            {items.map((item, index) => (
+                                <Link key={index} href={item.href} className="flex items-center py-2 text-white hover:underline">
+                                    <span className="mr-2 text-white">{item.icon}</span>
+                                    <span className="text-white">{item.text}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </Transition>
         </>
@@ -97,3 +109,4 @@ Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
 
 export default Dropdown;
+
