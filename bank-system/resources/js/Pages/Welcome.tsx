@@ -17,18 +17,30 @@ export default function Welcome() {
         data.password_confirmation = data.password;
 
         if (data.password.length < 9) {
-            showToast();
+            if (toast) {
+                showToast(toast);
+            }
         } else {
             post(route('register'));
         }
     };
 
-    const toast = document.getElementById('toast-top-right');
+    const toast = document.getElementById('toast-top-right')!;
 
-    function showToast() {
-        toast.classList.remove('hidden');
+    function showToast(toastElement: HTMLElement) {
+        try {
+            toastElement.classList.remove('hidden');
+        } catch {
+            console.log('Falha ao exibir Toast');
+        }
         setTimeout(() => {
-            toast.classList.add('hidden');
+            try {
+                if (toastElement) {
+                    toastElement.classList.add('hidden');
+                }
+            } catch {
+                console.log('Falha ao esconder toast.');
+            }
         }, 5000);
     }
 
