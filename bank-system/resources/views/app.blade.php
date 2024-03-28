@@ -16,10 +16,6 @@
     @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
     @inertiaHead
 
-    <!-- Vite Manifest -->
-    <script src="{{ mix('js/manifest.js', 'build') }}" defer></script>
-    <script src="{{ mix('js/vendor.js', 'build') }}" defer></script>
-    <script src="{{ mix('js/app.js', 'build') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
     @inertia
