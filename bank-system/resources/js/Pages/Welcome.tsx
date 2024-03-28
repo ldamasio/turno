@@ -147,8 +147,8 @@ export default function Welcome() {
                     >
                         SIGN UP
                     </button>
-                    <div id="toast-top-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-red-500 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow top-5 right-5 hidden" role="alert">
-                        <div class="text-sm font-normal">The password field must be at least 8 characters.</div>
+                    <div id="toast-top-right" className="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-red-500 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow top-5 right-5 hidden" role="alert">
+                        <div className="text-sm font-normal">The password field must be at least 8 characters.</div>
                     </div>
 
                 </div>
