@@ -1,6 +1,5 @@
 import { useEffect, FormEventHandler } from 'react';
 import { Link, Head, useForm } from '@inertiajs/react';
-import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function Welcome() {
 
@@ -26,7 +25,7 @@ export default function Welcome() {
 
                 <div className="bg-bnb-blue text-white py-20 pb-5">
                     <div className="container mx-auto text-center">
-                        <h1 className="text-4xl font-bold">BNB Bank</h1>
+                        <h1 className="text-4xl font-bold">BNB Bank vbeta</h1>
                     </div>
                 </div>
 
@@ -111,33 +110,27 @@ export default function Welcome() {
                             </div>
                         </div>
 
-                        <div>
-
-                            <PrimaryButton className="
-                            bg-bnb-blue
-                            flex w-full 
-                            justify-center 
-                            rounded-sm
-                            mt-10
-                            px-3 
-                            py-3
-                            text-sm 
-                            font-semibold 
-                            leading-6 
-                            text-white 
-                            shadow-sm 
-                            " disabled={processing}>
-                                SIGN UP
-                            </PrimaryButton>
-
-                            {/* <button
+                        <div >
+                            <button
                                 type="submit"
                                 className="
-   
+                                    bg-bnb-blue
+                                    text-white
+                                    flex w-full 
+                                    justify-center 
+                                    rounded-sm
+                                    mt-10
+                                    px-3 
+                                    py-3
+                                    text-sm 
+                                    font-semibold 
+                                    leading-6 
+                                    text-white 
+                                    shadow-sm 
                                 "
                             >
                                 SIGN UP
-                            </button> */}
+                            </button>
                         </div>
                     </form>
 
