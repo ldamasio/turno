@@ -1,5 +1,6 @@
 import { useEffect, FormEventHandler } from 'react';
 import { Link, Head, useForm } from '@inertiajs/react';
+import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Welcome() {
 
@@ -15,35 +16,38 @@ export default function Welcome() {
 
         data.password_confirmation = data.password;
 
-        post(route('register'));
+        if (data.password.length < 9) {
+            showToast();
+        } else {
+            post(route('register'));
+        }
     };
 
+    const toast = document.getElementById('toast-top-right');
+
+    function showToast() {
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 5000);
+    }
+
     return (
-        <>
+        <GuestLayout>
             <Head title="Sign Up" />
-            <div className="flex min-h-full flex-col justify-center">
-
-                <div className="bg-bnb-blue text-white py-20 pb-5">
-                    <div className="container mx-auto text-center">
-                        <h1 className="text-4xl font-bold">BNB Bank vbeta</h1>
-                    </div>
-                </div>
-
-
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm ml-5 mr-5">
-                    <form className="space-y-6" onSubmit={submit}>
-                        <div className="ml-3 mr-3">
-                            <div>
-                                <div className="mt-2">
-                                    <input
-                                        id="username"
-                                        name="username"
-                                        type="text"
-                                        autoComplete="email"
-                                        required
-                                        placeholder="username"
-                                        onChange={(e) => setData('name', e.target.value)}
-                                        className="
+            <form className="space-y-6" onSubmit={submit}>
+                <div className="ml-3 mr-3">
+                    <div>
+                        <div className="mt-2">
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                autoComplete="email"
+                                required
+                                placeholder="username"
+                                onChange={(e) => setData('name', e.target.value)}
+                                className="
                                             block 
                                             w-full 
                                             rounded-xl
@@ -55,65 +59,65 @@ export default function Welcome() {
                                             md:text-md 
                                             sm:leading-6
                                         "
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <div className="mt-6">
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        autoComplete="email"
-                                        required
-                                        placeholder="email"
-                                        onChange={(e) => setData('email', e.target.value)}
-                                        className="
-                                            block 
-                                            w-full 
-                                            rounded-xl
-                                            border-2
-                                            border-bnb-light-blue
-                                            placeholder-text-bnb-light-blue
-                                            py-3
-                                            shadow-sm
-                                            md:text-md 
-                                            sm:leading-6
-                                        "
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="mt-6">
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        placeholder="password"
-                                        onChange={(e) => setData('password', e.target.value)}
-                                        required
-                                        className="
-                                            block 
-                                            w-full 
-                                            rounded-xl
-                                            border-2
-                                            border-bnb-light-blue
-                                            placeholder-text-bnb-light-blue
-                                            py-3
-                                            shadow-sm
-                                            md:text-md 
-                                            sm:leading-6
-                                        "
-                                    />
-                                </div>
-                            </div>
+                            />
                         </div>
-
-                        <div >
-                            <button
-                                type="submit"
+                    </div>
+                    <div>
+                        <div className="mt-6">
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autoComplete="email"
+                                required
+                                placeholder="email"
+                                onChange={(e) => setData('email', e.target.value)}
                                 className="
+                                            block 
+                                            w-full 
+                                            rounded-xl
+                                            border-2
+                                            border-bnb-light-blue
+                                            placeholder-text-bnb-light-blue
+                                            py-3
+                                            shadow-sm
+                                            md:text-md 
+                                            sm:leading-6
+                                        "
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="mt-6">
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="password"
+                                onChange={(e) => setData('password', e.target.value)}
+                                required
+                                className="
+                                            block 
+                                            w-full 
+                                            rounded-xl
+                                            border-2
+                                            border-bnb-light-blue
+                                            placeholder-text-bnb-light-blue
+                                            py-3
+                                            shadow-sm
+                                            md:text-md 
+                                            sm:leading-6
+                                        "
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div >
+                    <button
+                        type="submit"
+                        className="
                                     bg-bnb-blue
                                     text-white
                                     flex w-full 
@@ -128,21 +132,23 @@ export default function Welcome() {
                                     text-white 
                                     shadow-sm 
                                 "
-                            >
-                                SIGN UP
-                            </button>
-                        </div>
-                    </form>
+                    >
+                        SIGN UP
+                    </button>
+                    <div id="toast-top-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-red-500 divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow top-5 right-5 hidden" role="alert">
+                        <div class="text-sm font-normal">The password field must be at least 8 characters.</div>
+                    </div>
 
-                    <div className="border-t-4 border-bnb-light-blue w-5 mx-auto my-8"></div>
-
-                    <p className="mt-8 mb-20 text-center text-sm">
-                        <a href="#" className="text-bnb-blue font-semibold leading-6">
-                            Already have a account?
-                        </a>
-                    </p>
                 </div>
-            </div>
-        </>
+            </form>
+
+            <div className="border-t-4 border-bnb-light-blue w-5 mx-auto my-8"></div>
+
+            <p className="mt-8 mb-20 text-center text-sm">
+                <a href="login" className="text-bnb-blue font-semibold leading-6">
+                    Already have a account?
+                </a>
+            </p>
+        </GuestLayout>
     );
 }

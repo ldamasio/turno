@@ -30,9 +30,9 @@ export default function Login({ status, canResetPassword }: { status?: string, c
         <GuestLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && <div className="mb-4 font-medium text-sm">{status}</div>}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="p-9">
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -41,7 +41,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full bg-white"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
@@ -77,20 +77,17 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                <div className="flex items-center">
+                    <PrimaryButton disabled={processing}>
                         Log in
                     </PrimaryButton>
                 </div>
+
+                <p className="mt-8 mb-20 text-left text-sm">
+                    <a href="/" className="text-bnb-blue font-semibold leading-6">
+                        Sign Up
+                    </a>
+                </p>
             </form>
         </GuestLayout>
     );
