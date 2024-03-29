@@ -1,4 +1,5 @@
 import { useState, PropsWithChildren, ReactNode } from 'react';
+import Menu from '@/Components/Menu';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
@@ -14,6 +15,7 @@ export default function Home({ user, header, children }: PropsWithChildren<{ use
 
                     <div className="flex items-center justify-between h-16 w-full">
 
+                        <Menu />
 
                         <div className="flex items-center justify-center flex-1">
                             <div className="hidden sm:-my-px sm:ms-10 sm:flex">
