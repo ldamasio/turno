@@ -1,1 +1,19 @@
-GET http://127.0.0.1:8000/api/hello HTTP/1.1
+# GET http://127.0.0.1:8181/api/hello HTTP/1.1
+
+GET http://127.0.0.1:8181/api/balance HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic base64(turno1:turno123456)
+
+# POST http://127.0.0.1:8181/login
+# Content-Type: application/json
+# Cookie: XSRF-TOKEN=eyJpdiI6Iml3K1hrY0tSeEtjOWNackg5bmNIMVE9PSIsInZhbHVlIjoiQlVUZGdSUytXWlgxUER5b2VzOVdwRXhub0l4RnNBQmdTWVVVSWtoQ0wwbG5jZDhxNTZVL1JvTFc2VTZ6TDlXYnRsNjB6ellmNHNBSXFweEoySzd0S3JHT09FZHAwcEdpUWRFRDVoaG9uelF5aVBLQk9MdVE1VFJSUittaWJRSGEiLCJtYWMiOiJiNTkzODJjY2UwZjBlN2MwMTlhMmY0M2YzMmY0YWJkNzY1N2FjNjE0MzNjNjk3NzcwNjUwODMxMjcyNzlmODI5IiwidGFnIjoiIn0%3D; bnb_bank_session=eyJpdiI6Ik5zakhyNVB0OWZCYmVxN3hraTBibnc9PSIsInZhbHVlIjoiSExwbHNyaUNWeGJNZmt3bDl1cE85WkNvUzlTcS9nTXRnbzBqbnVsR2V0cGtwVzE3YWhMcHV0NXMxSlhKclRHNnhYaWRaVmtOSFdhQ1NrcHdrczhWZ0daRC9lQTFyeWQyZERUL2tMODdRZU4vWVYvQVRUbmtkbUg0eDNUeGJrM2kiLCJtYWMiOiIyZThhZTQzNTcyYWMzZWI5ZTVkZGU0NTgzNTQzMmM3Nzg3YmVkYTJhY2VhYzBlM2ZlNjBkMjQ4MzNjZmQ3NWU2IiwidGFnIjoiIn0%3D
+
+# {
+#   "email": "turno@central.cc",
+#   "password": "turno123456"
+# }
+
+
+# GET http://127.0.0.1:8000/api/hello HTTP/1.1
+# Authorization: Bearer xxx
